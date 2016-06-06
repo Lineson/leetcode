@@ -10,23 +10,28 @@ void swap(int *a, int *b){
     return; 
 }
 
+
+
 void quick_sort(int *arr, int h, int t) {
     if (h >= t) return;
 
     int flag = arr[h];
     int i = h+1;
     int j = t;
-    while(i < j) {
-        while(arr[i] <= flag && i<=j) i++;
-        while(arr[j] >= flag && j>=i) j--;
-        if (i < j) swap(&arr[i], &arr[j]);
+    while(i <= j) {
+        while(arr[i] <= flag && i<j) i++;
+        while(arr[j] > flag) j--;
+        if (i>=j) break;
+        swap(&arr[i], &arr[j]);
     }
-    swap(&arr[h], &arr[i]);
 
-    quick_sort(arr, h, j - 1);
+    swap(&arr[h], &arr[j]);
+
+    quick_sort(arr, h, j-1);
     quick_sort(arr, j+1, t);
     return;
 }
+
 
 /*time outed for leetcode*/
 int majorityElement_qkst(int* nums, int numsSize) {
@@ -54,6 +59,7 @@ int majorityElement(int* nums, int numsSize) {
     }
     return condidate; 
 }
+
 
 int main(int argc, char const *argv[])
 {
